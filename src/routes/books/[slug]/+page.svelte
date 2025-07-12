@@ -6,11 +6,13 @@
   let book = booksData.find(b => b.slug === $page.params.slug);
 </script>
 
-{#if book}
-  <svelte:head>
+<svelte:head>
+  {#if book}
     <title>{book.title} - Narrow Road Books</title>
-  </svelte:head>
-{/if}
+  {:else}
+    <title>Narrow Road Books</title>
+  {/if}
+</svelte:head>
 
 {#if book}
   <section class="min-h-screen bg-gray-900 text-white flex items-center justify-center p-8">
