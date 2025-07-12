@@ -7,6 +7,12 @@
 </script>
 
 {#if book}
+  <svelte:head>
+    <title>{book.title} - Narrow Road Books</title>
+  </svelte:head>
+{/if}
+
+{#if book}
   <section class="min-h-screen bg-gray-900 text-white flex items-center justify-center p-8">
     <div class="max-w-3xl">
       <h1 class="text-5xl font-bold mb-6">{book.title}</h1>

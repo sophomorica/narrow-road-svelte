@@ -13,8 +13,8 @@
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
       transition:fade={{ duration: 500 }}
     >
-      {#each booksData as book}
-        <BookCard { ...book } />
+      {#each booksData as book, i}
+        <BookCard {...book} delay={i * 100} />
       {/each}
     </div>
   </div>

@@ -3,6 +3,10 @@
   let { children } = $props();
 </script>
 
+<svelte:head>
+  <title>Narrow Road Books</title>
+</svelte:head>
+
 <div class="min-h-screen bg-stone-50 text-stone-800 font-sans flex flex-col">
   <nav class="bg-stone-100 border-b-2 border-orange-500 p-4 shadow-sm">
     <div class="container mx-auto flex space-x-4">
