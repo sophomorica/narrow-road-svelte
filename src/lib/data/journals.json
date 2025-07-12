@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Verses of Jane Austen Creative Journal",
+    "cover": "https://m.media-amazon.com/images/I/71cnE5hrOKL._SL1499_.jpg",
+    "slug": "creative-morning-pages",
+    "published": true
+  },
+  {
+    "title": "Mindful Storytelling",
+    "cover": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=600&fit=crop&crop=center",
+    "slug": "mindful-storytelling",
+    "published": true
+  },
+  {
+    "title": "Character Development Workshop",
+    "cover": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=center",
+    "slug": "character-development-workshop",
+    "published": true
+  },
+  {
+    "title": "Poetry & Reflection",
+    "cover": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop&crop=center",
+    "slug": "poetry-reflection",
+    "published": true
+  },
+  {
+    "title": "Dream Journal Prompts",
+    "slug": "dream-journal-prompts",
+    "published": false,
+    "eta": "March 2025"
+  },
+  {
+    "title": "Nature Writing Guide",
+    "slug": "nature-writing-guide",
+    "published": false,
+    "eta": "April 2025"
+  },
+  {
+    "title": "Inner Dialogue Discovery",
+    "slug": "inner-dialogue-discovery",
+    "published": false,
+    "eta": "May 2025"
+  }
+]
