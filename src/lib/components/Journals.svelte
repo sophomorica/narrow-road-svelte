@@ -1,10 +1,25 @@
 <script>
+  import { onMount } from 'svelte';
+  import { gsap } from 'gsap';
+  import { TextPlugin, SplitText } from 'gsap/all'; // For word splitting
+  import { inview } from 'svelte-inview';
+  import { typewriter } from '$lib/transitions/typewriter.js';
   import journalsData from '$lib/data/journals.json';
   import PaywallButton from '$lib/components/PaywallButton.svelte';
+  import PromptDemo from '$lib/components/PromptDemo.svelte';
 
+  gsap.registerPlugin(TextPlugin, SplitText);
+  
   let published = journalsData.filter(j => j.published);
   let upcoming = journalsData.filter(j => !j.published);
   let email = '';
+  let textRef;
+  let isInView = false;
+  
+  onMount(() => {
+    const split = new SplitText(textRef, { type: 'words' });
+    gsap.from(split.words, { duration: 1, opacity: 0, rotation: 360, stagger: 0.05, ease: 'back.out' }); // Swirl in
+  });
   
   function handleNotify(event) {
     event.preventDefault();
@@ -17,6 +32,11 @@
 <section class="py-20 bg-stone-100">
   <div class="container mx-auto px-6">
     <h2 class="text-4xl font-bold mb-10 text-center text-emerald-800 border-b-2 border-orange-500 pb-4 inline-block w-full">Prompt Journals</h2>
+    
+    <p bind:this={textRef} class="text-center text-lg text-stone-600 mb-12 max-w-3xl mx-auto italic">
+      Within these pages, you are invited to embark on a journey... May your words find their place among the great conversations of the ages.
+    </p>
+    
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {#each published as j}
         <div class="rounded-2xl overflow-hidden shadow-lg bg-stone-50 border-2 border-orange-200">
@@ -53,6 +73,31 @@
           </form>
         </div>
       {/each}
+    </div>
+    
+    <!-- Prompt Demo Section -->
+    <div class="mt-16 text-center">
+      <h3 class="text-2xl font-semibold mb-6 text-emerald-800">Try Your Own Creative Prompt</h3>
+      <p class="text-stone-600 mb-8">Experience the magic of prompt-based journaling with our interactive demo!</p>
+      <PromptDemo />
+    </div>
+    
+    <!-- Typewriter Effect Section -->
+    <div class="mt-20 text-center">
+      <div 
+        use:inview={{ unobserveOnEnter: true }} 
+        on:change={({ detail }) => isInView = detail.inView}
+        class="max-w-4xl mx-auto"
+      >
+        {#if isInView}
+          <p 
+            transition:typewriter={{ duration: 2000 }}
+            class="text-2xl text-emerald-700 font-medium leading-relaxed"
+          >
+            Discover 50 thoughtfully crafted writing prompts designed to unlock your creativity, explore deep emotions, and guide you on a transformative journey of self-discovery through the power of words.
+          </p>
+        {/if}
+      </div>
     </div>
   </div>
 </section>

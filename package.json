@@ -37,8 +37,10 @@
 	},
 	"dependencies": {
 		"@stripe/stripe-js": "^7.4.0",
+		"gsap": "^3.13.0",
 		"pocketbase": "^0.26.1",
 		"stripe": "^18.3.0",
-		"svelte-confetti": "^2.3.2"
+		"svelte-confetti": "^2.3.2",
+		"svelte-inview": "^4.0.4"
 	}
 }

@@ -23,7 +23,7 @@
   <h2>Discover Your Moral Path</h2>
   <p>{questions[$step].q}</p>
   {#each questions[$step].options as opt}
-    <button onclick={() => next(opt)}>{opt}</button>
+    <button on:click={() => next(opt)}>{opt}</button>
   {/each}
 {:else}
   <p transition:fade>{result} <PaywallButton text="Get the Book" page="/books/the-arrow" /></p>
