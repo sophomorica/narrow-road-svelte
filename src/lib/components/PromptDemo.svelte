@@ -1,132 +1,74 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { fade } from 'svelte/transition';
   import { gsap } from 'gsap';
+  import { TextPlugin } from 'gsap/TextPlugin';
+  import { SplitText } from 'gsap/SplitText';
+  import { browser } from '$app/environment';
   
-  let showModal = $state(false);
-  let userInput = $state('');
-  let response = $state('');
-  let currentPrompt = $state('');
-  
-  const prompts = [
-    "What would Jane say about finding courage in uncertainty?",
-    "How does love manifest in the small, everyday moments of your life?",
-    "What sacrifices have shaped your character, dear reader?",
-    "If pride were a garden, what would you need to prune today?",
-    "What prejudices have you overcome on your journey of growth?",
-    "How do you show compassion when your heart feels guarded?",
-    "What does true friendship mean in times of trial?",
-    "How has patience been your teacher in life's delays?",
-    "What wisdom would you pass to someone facing your past struggles?"
-  ];
-  
-  function getRandomPrompt() {
-    return prompts[Math.floor(Math.random() * prompts.length)];
-  }
-  
-  function openModal() {
-    currentPrompt = getRandomPrompt();
-    showModal = true;
-  }
+  gsap.registerPlugin(TextPlugin, SplitText);
+  let showModal = false;
+  let prompt = 'Describe a family adventure teaching sacrifice...';
+  let userInput = '';
+  let responseElem;
+  let response = '';
+  let introRef;
   
   function generate() {
-    const responses = [
-      "Your words echo Austen's elegance—explore more in the journal!",
-      "Such thoughtful reflection! Jane would admire your introspection.",
-      "Your insights mirror the wisdom found in our devotional pages.",
-      "Beautiful! This is exactly the kind of reflection our journal inspires.",
-      "Your heart's honesty shines through—continue this journey with us.",
-      "Profound thoughts! You're ready for deeper exploration in our journal.",
-      "Your words carry the spirit of timeless wisdom—keep writing!",
-      "This reflection captures the essence of what our prompts unlock."
-    ];
-    response = responses[Math.floor(Math.random() * responses.length)];
+    response = `Your tale inspires! Like in our journals, it teaches ${userInput.slice(0,20)}...`;
+    if (browser && responseElem) {
+      gsap.to(responseElem, { duration: response.length * 0.075, text: response, ease: 'none' }); // Slow typing
+    }
+  }
+  
+  function closeModal(e) { 
+    if (e.key === 'Escape') showModal = false; 
   }
   
   onMount(() => {
-    if (showModal) {
-      gsap.from('.prompt-text', { 
-        duration: 1.5, 
-        opacity: 0, 
-        x: -50, 
-        rotation: -180, 
-        stagger: 0.1,
-        ease: 'back.out(1.7)'
-      });
+    if (browser) {
+      window.addEventListener('keydown', closeModal);
+      // Animate the intro text
+      if (introRef) {
+        const split = new SplitText(introRef, { type: 'words' });
+        gsap.from(split.words, { duration: 1.5, opacity: 0, rotation: 180, stagger: 0.05, ease: 'back.out' }); // Swirl
+      }
     }
   });
   
-  // Trigger animation when modal opens
-  $effect(() => {
-    if (showModal) {
-      setTimeout(() => {
-        gsap.from('.prompt-text', { 
-          duration: 1.5, 
-          opacity: 0, 
-          x: -50, 
-          rotation: -180, 
-          stagger: 0.1,
-          ease: 'back.out(1.7)'
-        });
-      }, 100);
+  onDestroy(() => {
+    if (browser) {
+      window.removeEventListener('keydown', closeModal);
     }
   });
 </script>
 
-<button 
-  onclick={openModal} 
-  class="px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-full font-medium transition-colors shadow-lg hover:shadow-orange-500/25"
->
-  Begin Your Reflection
-</button>
+<p bind:this={introRef} class="text-center max-w-2xl mx-auto mb-12 text-lg text-stone-700">
+  Within these pages, you are invited to embark on a journey that transcends time—a sacred conversation between your thoughts, Jane Austen's timeless wisdom, and the eternal truths of the Holy Bible...
+</p>
 
+<button on:click={() => showModal=true} class="px-6 py-3 bg-emerald-600 text-white rounded-full mx-auto block mt-8">Try a Free Prompt!</button>
 {#if showModal}
-  <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" transition:fade>
-    <div class="bg-white p-8 rounded-xl max-w-lg w-full mx-4 shadow-2xl">
-      <div class="text-center mb-6">
-        <h3 class="text-2xl font-semibold mb-2 text-emerald-800">Dear Reader,</h3>
-        <div class="prompt-text text-lg text-stone-600 italic leading-relaxed">
-          {currentPrompt}
-        </div>
-      </div>
-      
-      <div class="mb-6">
-        <textarea 
-          bind:value={userInput} 
-          placeholder="Share your heartfelt thoughts here..."
-          class="w-full h-32 p-4 border-2 border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 resize-none text-stone-700 leading-relaxed"
-        ></textarea>
-      </div>
-      
-      <div class="flex gap-4 mb-4">
-        <button 
-          onclick={generate}
-          disabled={!userInput.trim()}
-          class="flex-1 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 disabled:bg-stone-300 disabled:cursor-not-allowed text-white rounded-lg transition-colors font-medium"
-        >
-          Share Your Reflection
-        </button>
-        <button 
-          onclick={() => {showModal = false; response = ''; userInput = '';}}
-          class="px-6 py-3 bg-stone-300 hover:bg-stone-400 text-stone-700 rounded-lg transition-colors"
-        >
-          Close
-        </button>
-      </div>
-      
+  <div
+    class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+    transition:fade
+    on:click|self={() => showModal=false}
+    tabindex="0"
+    role="button"
+    aria-label="Close modal"
+    on:keydown|self={(e) => { if (e.key === 'Enter' || e.key === ' ') { showModal = false; } }}
+  >
+    <div class="bg-white p-8 rounded-xl max-w-lg w-full relative">
+      <button on:click={() => showModal=false} class="absolute top-2 right-2 text-gray-500" aria-label="Close">×</button>
+      <label for="prompt-input" class="block text-sm font-medium mb-2">Your Response to: {prompt}</label>
+      <textarea id="prompt-input" bind:value={userInput} class="w-full h-32 p-4 border-2 border-orange-300 rounded-lg focus:ring-orange-500" placeholder="Write here..."></textarea>
+      <button on:click={generate} class="mt-4 px-6 py-2 bg-orange-600 text-white rounded-full w-full">Generate Magic</button>
       {#if response}
-        <div class="p-4 bg-gradient-to-r from-emerald-50 to-orange-50 border-l-4 border-emerald-500 rounded-lg">
-          <p class="text-emerald-700 font-medium text-center italic">
-            {response}
-          </p>
-          <div class="mt-3 text-center">
-            <button 
-              onclick={() => {currentPrompt = getRandomPrompt(); response = ''; userInput = '';}}
-              class="text-orange-600 hover:text-orange-700 font-medium text-sm underline"
-            >
-              Try Another Prompt
-            </button>
+        <div class="mt-4 relative">
+          <div class="h-2 bg-orange-200 rounded-full">
+            <div class="h-full bg-orange-600 rounded-full" style="width: {(response.length / response.length) * 100}%"></div> <!-- Progress -->
           </div>
+          <p bind:this={responseElem} class="text-stone-700"></p>
         </div>
       {/if}
     </div>
