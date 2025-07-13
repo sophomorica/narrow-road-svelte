@@ -20,7 +20,7 @@
   let typingComplete = false;
   
   // Enhanced prompts with more depth
-  const sacredPrompts = [
+  const journalPrompt = [
     "Dear soul, when did you last feel the presence of the Divine in an ordinary moment? Describe that sacred encounter as Jane might have—with gentle observation and profound gratitude.",
     "In the quiet chambers of your heart, what truth have you been avoiding? Write as if confessing to a dear friend who sees your soul with perfect clarity.",
     "If pride were a garden in your heart, what would you need to tend, prune, or plant anew? Let your words bloom like flowers in Austen's countryside.",
@@ -44,7 +44,7 @@
   ];
   
   function getRandomPrompt() {
-    return sacredPrompts[Math.floor(Math.random() * sacredPrompts.length)];
+    return journalPrompt[Math.floor(Math.random() * journalPrompt.length)];
   }
   
   function getRandomResponse() {
@@ -211,7 +211,7 @@
       <svg class="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" fill="currentColor" viewBox="0 0 20 20">
         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
       </svg>
-      Enter the Sacred Dialogue
+      Start dialogue
     </span>
     
     <!-- Magical sparkles -->
@@ -234,8 +234,6 @@
     <div 
       class="bg-white rounded-2xl max-w-2xl w-full shadow-2xl border-4 border-orange-200 relative overflow-hidden"
       transition:scale={{ duration: 300 }}
-      onclick={(e) => e.stopPropagation()}
-      onkeydown={(e) => e.stopPropagation()}
       role="document"
     >
       <!-- Magical header -->
@@ -261,7 +259,7 @@
       <!-- Prompt section -->
       <div class="p-8">
         <div class="mb-8">
-          <h3 class="text-lg font-semibold mb-4 text-emerald-800 text-center">Your Sacred Prompt</h3>
+          <h3 class="text-lg font-semibold mb-4 text-emerald-800 text-center">Prompt</h3>
           <div class="bg-gradient-to-r from-emerald-50 to-orange-50 rounded-xl p-6 border-2 border-orange-200">
             <p class="prompt-text text-lg text-stone-700 leading-relaxed italic text-center">
               {currentPrompt}
@@ -299,10 +297,10 @@
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Weaving Your Sacred Thread...
+                Weaving Your Threads...
               </span>
             {:else}
-              Weave Your Sacred Thread
+              Weave Your Thread
             {/if}
           </button>
           
@@ -310,7 +308,7 @@
             onclick={tryAnotherPrompt}
             class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium rounded-lg shadow-lg transform transition-all duration-200 hover:from-orange-600 hover:to-orange-700 hover:shadow-xl hover:scale-105 active:scale-95"
           >
-            New Sacred Prompt
+            New Prompt
           </button>
         </div>
         
@@ -324,7 +322,7 @@
               ></div>
             </div>
             <p class="text-xs text-stone-500 mt-2 text-center">
-              The sacred scribes are preparing your response...
+              The scribes are preparing your response...
             </p>
           </div>
         {/if}
@@ -336,7 +334,7 @@
               <svg class="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
               </svg>
-              <h4 class="font-semibold text-emerald-800">Your Sacred Response</h4>
+              <h4 class="font-semibold text-emerald-800">Your Response</h4>
             </div>
             
             <p 
@@ -350,11 +348,11 @@
             {#if typingComplete}
               <div class="mt-6 text-center">
                 <p class="text-sm text-stone-600 mb-4">
-                  Ready to continue this sacred journey?
+                  Ready to continue this journey?
                 </p>
                 <a href="/journals" class="inline-block">
                   <button class="px-8 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold rounded-lg shadow-lg transform transition-all duration-200 hover:from-emerald-600 hover:to-emerald-700 hover:shadow-xl hover:scale-105 active:scale-95">
-                    Claim Your Sacred Journal
+                    Claim Your Journal
                   </button>
                 </a>
               </div>

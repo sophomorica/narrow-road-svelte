@@ -58,7 +58,7 @@
   function animateTypewriter() {
     if (browser && typewriterRef && !hasTyped) {
       hasTyped = true;
-      const text = "Discover 50 thoughtfully crafted writing prompts that bridge the elegance of Jane Austen with the timeless wisdom of Scripture. Each prompt is designed to awaken your soul, deepen your faith, and inspire reflection that transcends the ordinary—creating a sacred space where literature and spirituality dance together in perfect harmony.";
+      const text = "Discover 50 thoughtfully crafted writing prompts that bridge the elegance of Jane Austen with the timeless wisdom of Scripture. Each prompt is designed to awaken your soul, deepen your faith, and inspire reflection that transcends the ordinary—creating a contemplative space where literature and spirituality dance together in perfect harmony.";
       
       gsap.to(typewriterRef, {
         duration: text.length * 0.075,
@@ -120,7 +120,7 @@
       </h2>
       
       <p bind:this={introRef} class="text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed font-light">
-        Within these pages, you are invited to embark on a journey that transcends time—a sacred conversation between your thoughts, Jane Austen's timeless wisdom, and the eternal truths of the Holy Bible. Here, literature becomes prayer, and writing becomes worship.
+        Within these pages, you are invited to embark on a journey that transcends time—a meaningful conversation between your thoughts, Jane Austen's timeless wisdom, and the eternal truths of the Holy Bible. Here, literature becomes prayer, and writing becomes worship.
       </p>
     </div>
     
@@ -131,7 +131,7 @@
       class="mb-20"
     >
       <div class="max-w-4xl mx-auto text-center">
-        <h3 class="text-3xl font-semibold mb-8 text-emerald-800">What Makes This Sacred?</h3>
+        <h3 class="text-3xl font-semibold mb-8 text-emerald-800">What Makes This Special?</h3>
         <div class="bg-white rounded-2xl p-8 shadow-xl border-2 border-orange-200 relative overflow-hidden">
           <!-- Animated border -->
           <div class="absolute inset-0 bg-gradient-to-r from-orange-400 via-emerald-400 to-orange-400 rounded-2xl opacity-20 animate-pulse"></div>
@@ -154,7 +154,7 @@
     
     <!-- Phase 3: Journal Showcase -->
     <div class="mb-20">
-      <h3 class="text-3xl font-semibold mb-12 text-center text-emerald-800">Sacred Volumes</h3>
+      <h3 class="text-3xl font-semibold mb-12 text-center text-emerald-800">Timeless Volumes</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {#each published as j, index}
           <div class="flex flex-col items-center group">
@@ -234,7 +234,7 @@
             <form on:submit|preventDefault={handleNotify} class="flex flex-col items-center w-full max-w-48">
               <input
                 type="email"
-                placeholder="Your sacred email"
+                placeholder="Your email address"
                 bind:value={email}
                 required
                 class="w-full mb-4 px-4 py-3 border-2 border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 bg-white/90 text-sm transition-all duration-200"
@@ -255,7 +255,7 @@
       class="mb-20"
     >
       <div class="text-center mb-12">
-        <h3 class="text-3xl font-semibold mb-6 text-emerald-800">Experience the Sacred Dialogue</h3>
+        <h3 class="text-3xl font-semibold mb-6 text-emerald-800">Experience the Divine Dialogue</h3>
         <p class="text-stone-600 max-w-2xl mx-auto text-lg">
           Step into a moment of divine conversation. Let your soul speak through the wisdom of ages.
         </p>
@@ -272,7 +272,7 @@
       class="text-center"
     >
       <div class="bg-gradient-to-r from-emerald-50 to-orange-50 rounded-3xl p-12 shadow-xl border-2 border-orange-200">
-        <h3 class="text-4xl font-bold mb-6 text-emerald-800">Your Sacred Journey Awaits</h3>
+        <h3 class="text-4xl font-bold mb-6 text-emerald-800">Your Spiritual Journey Awaits</h3>
         <p class="text-xl text-stone-600 mb-8 max-w-2xl mx-auto">
           Join thousands who have discovered the transformative power of contemplative writing. 
           Your words will weave into the eternal tapestry of faith and literature.
@@ -281,7 +281,7 @@
         <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <a href="/books" class="group">
             <button class="px-10 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold rounded-xl shadow-lg transform transition-all duration-200 hover:from-emerald-600 hover:to-emerald-700 hover:shadow-xl hover:scale-105 active:scale-95 text-lg">
-              <span class="relative z-10">Begin Your Sacred Writing</span>
+              <span class="relative z-10">Begin Your Writing Journey</span>
               <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-xl"></div>
             </button>
           </a>
